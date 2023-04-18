@@ -2,17 +2,17 @@
 v: 0
 micros:
   - name: backend
-    src: ./mwb
+    src: ./src
     engine: python3.9
     presets:
       env:
-        - name: MWB_API_VERSIONS
+        - name: CUSTOM_API_VERSIONS
           default: [1]
-        - name: MWB_CACHE_TIME
+        - name: CUSTOM_CACHE_TIME
           default: 300
-        - name: MWB_SENTRY_ENABLED
+        - name: CUSTOM_SENTRY_ENABLED
           default: 0
-        - name: MWB_SENTRY_DSN
+        - name: CUSTOM_SENTRY_DSN
           default: ...
-        - name: MWB_SENTRY_TRACES_SAMPLE_RATE
+        - name: CUSTOM_SENTRY_TRACES_SAMPLE_RATE
           default: 1.0

@@ -70,7 +70,7 @@ class Config(metaclass=src.utils.Singleton):
         return t.cast(te.Self, cfg)
 
     @staticmethod
-    def _get_right_env_variables(cfg: dictconfig.DictConfig, *, prefix: str = "MWB") -> t.List[str]:
+    def _get_right_env_variables(cfg: dictconfig.DictConfig, *, prefix: str = "CUSTOM") -> t.List[str]:
         result = []
         for key in cfg:
             key_to_look_for = f"{prefix}_{key!s}" if prefix else str(key)
@@ -82,7 +82,7 @@ class Config(metaclass=src.utils.Singleton):
         return result
 
     @staticmethod
-    def _handle_env_variables(cfg: dictconfig.DictConfig, *, prefix: str = "MWB") -> None:
+    def _handle_env_variables(cfg: dictconfig.DictConfig, *, prefix: str = "CUSTOM") -> None:
         """Process all values, and redef them with values from env variables."""
         for key in cfg:
             key_to_look_for = f"{prefix}_{key!s}" if prefix else str(key)
