@@ -1,0 +1,23 @@
+{
+  "template": "C:\\Users\\perch\\Desktop\\programming\\python-template",
+  "commit": "56d974548d045d5e2a83827190484e8eab4a7c85",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "project_name": "backend",
+      "organization": "PerchunPak",
+      "project_description": "The API for statusmc.perchun.it (api.statusmc.perchun.it).",
+      "other_languages_support": "n",
+      "ukrainian_language_support": "n",
+      "russian_language_support": "n",
+      "license": "MIT",
+      "_copy_without_render": [
+        ".venv",
+        "docs/_build",
+        "docs/_autoapi_templates/python"
+      ],
+      "_template": "C:\\Users\\perch\\Desktop\\programming\\python-template"
+    }
+  },
+  "directory": null
+}
