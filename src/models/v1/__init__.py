@@ -2,9 +2,11 @@
 from .bedrock import BedrockStatusResponse
 from .java import JavaStatusResponse
 from .offline import OfflineStatusResponse
+from .query import QueryResponse
 
 __all__ = [
     "BedrockStatusResponse",
     "JavaStatusResponse",
+    "QueryResponse",
     "OfflineStatusResponse",
 ]

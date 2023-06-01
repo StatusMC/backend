@@ -1,6 +1,7 @@
 import abc
 import typing as t
 
+import mcstatus.querier
 import mcstatus.status_response
 import pydantic
 import typing_extensions as te
@@ -33,8 +34,11 @@ class FormattedString(BaseModel):  # type: ignore[misc] # Explicit "Any"
     ansi: str
 
 
-class VersionInfo(BaseModel):
+class VersionInfoOnlyName(BaseModel):
     name: FormattedString
+
+
+class VersionInfo(VersionInfoOnlyName):
     protocol: int
 
 
@@ -53,7 +57,12 @@ class BaseStatusResponse(BaseModel, abc.ABC):
     def from_mcstatus_object(
         cls,
         server: t.Union[mcstatus.JavaServer, mcstatus.BedrockServer],
-        status: t.Union[mcstatus.status_response.JavaStatusResponse, mcstatus.status_response.BedrockStatusResponse],
+        status_or_query: t.Union[
+            mcstatus.status_response.JavaStatusResponse,
+            mcstatus.status_response.BedrockStatusResponse,
+            mcstatus.querier.QueryResponse,
+        ],
+        /,
     ) -> te.Self:
         ...
 
