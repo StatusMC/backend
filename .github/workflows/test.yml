@@ -58,7 +58,7 @@ jobs:
       run: |
         poetry run python .github/commit_and_push.py \
           --token ${{ secrets.GITHUB_TOKEN }} \
-          {{ cookiecutter.organization }}/{{ cookiecutter.project_name }} \
+          StatusMC/backend \
           ${{ github.head_ref || github.ref_name }} \
           "Apply codestyle :pencil2:"
 
@@ -70,6 +70,6 @@ jobs:
       run: |
         poetry run python .github/commit_and_push.py \
           --token ${{ secrets.GITHUB_TOKEN }} \
-          {{ cookiecutter.organization }}/{{ cookiecutter.project_name }} \
+          StatusMC/backend \
           ${{ github.head_ref || github.ref_name }} \
           "Update poetry.lock :chart_with_upwards_trend:"
