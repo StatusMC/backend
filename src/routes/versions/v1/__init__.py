@@ -6,8 +6,8 @@ from pathlib import Path
 
 import fastapi
 
+from src.logic.get_icon import get_icon
 from src.modules.v1 import AbstractModule
-from src.modules.v1.icon.logic import get_icon
 from src.routes.abc import ApiRouter
 
 
