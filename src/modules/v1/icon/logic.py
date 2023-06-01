@@ -2,10 +2,9 @@
 import base64
 import typing as t
 
-from routes.versions.v1.models import exc
-
-from src.routes.versions.v1 import models
-from src.routes.versions.v1.logic import get_status
+from src.logic import get_status
+from src.models import v1
+from src.models.v1 import exc
 
 DEFAULT_ICON = base64.b64decode(
     """
@@ -75,8 +74,8 @@ async def get_icon(ip: t.Optional[str]) -> bytes:
         return DEFAULT_ICON
 
     status = await get_status.get_status(ip, java=True)
-    if (isinstance(status, models.JavaStatusResponse) and status.icon is None) or isinstance(
-        status, (exc.MCStatusException, models.OfflineStatusResponse)
+    if (isinstance(status, v1.JavaStatusResponse) and status.icon is None) or isinstance(
+        status, (exc.MCStatusException, v1.OfflineStatusResponse)
     ):
         return DEFAULT_ICON
 

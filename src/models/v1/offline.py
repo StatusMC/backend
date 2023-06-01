@@ -2,9 +2,9 @@ import typing as t
 
 import mcstatus.motd
 import typing_extensions as te
-from routes.versions.v1.models.exc import MCStatusException
 
-from src.routes.versions.v1.models.shared import (
+from src.models.v1.exc import MCStatusException
+from src.models.v1.shared import (
     AddressInResponse,
     BaseStatusResponse,
     InternalInfo,

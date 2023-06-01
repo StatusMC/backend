@@ -1,10 +1,10 @@
 import traceback
+import typing as t
 
 import pydantic
-import typing as t
 import typing_extensions as te
 
-from src.routes.versions.v1.models.shared import InternalInfo
+from src.models.v1.shared import InternalInfo
 
 
 class MCStatusException(pydantic.BaseModel):
@@ -21,5 +21,7 @@ class MCStatusException(pydantic.BaseModel):
             internal=InternalInfo(
                 cached_at=0,
                 cache_ends_at=0,
-            ) if with_internal_info else None,
+            )
+            if with_internal_info
+            else None,
         )

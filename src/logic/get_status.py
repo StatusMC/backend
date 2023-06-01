@@ -2,13 +2,13 @@
 import typing as t
 
 import mcstatus
-from routes.versions.v1.models.exc import MCStatusException
 
-from src.routes.versions.v1.models import (
+from src.models.v1 import (
     BedrockStatusResponse,
     JavaStatusResponse,
     OfflineStatusResponse,
 )
+from src.models.v1.exc import MCStatusException
 
 
 @t.overload
@@ -45,7 +45,9 @@ async def get_status(
     try:
         status = await server.async_status()
     except Exception as exception:
-        return await OfflineStatusResponse.from_mcstatus_object(server, MCStatusException.from_exception(exception, with_internal_info=False))
+        return await OfflineStatusResponse.from_mcstatus_object(
+            server, MCStatusException.from_exception(exception, with_internal_info=False)
+        )
 
     model: t.Union[t.Type[JavaStatusResponse], t.Type[BedrockStatusResponse]] = (
         JavaStatusResponse if java else BedrockStatusResponse
