@@ -8,6 +8,6 @@ class AbstractModule(abc.ABC):
 
     @classmethod
     @abc.abstractmethod
-    async def execute(cls, ip: str) -> t.Any:  # type: ignore[misc] # explicit any
+    async def execute(cls, ip: str, arg: t.Optional[str] = None, /) -> t.Any:  # type: ignore[misc] # explicit any
         """Execute the module."""
         raise NotImplementedError("I'm abstract!")

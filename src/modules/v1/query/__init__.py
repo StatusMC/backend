@@ -11,9 +11,11 @@ class QueryModule(AbstractModule):
     """Query module for API v1."""
 
     @classmethod
-    async def execute(cls, ip: str) -> t.Union[QueryResponse, OfflineStatusResponse, MCStatusException]:
+    async def execute(
+        cls, ip: str, ip_from_args: t.Optional[str] = None
+    ) -> t.Union[QueryResponse, OfflineStatusResponse, MCStatusException]:
         """Execute the module."""
-        return await get_query(ip)
+        return await get_query(ip_from_args or ip)
 
 
 Module = QueryModule

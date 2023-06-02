@@ -11,9 +11,11 @@ class JavaStatusModule(AbstractModule):
     """Java status module for API v1."""
 
     @classmethod
-    async def execute(cls, ip: str) -> t.Union[JavaStatusResponse, OfflineStatusResponse, MCStatusException]:
+    async def execute(
+        cls, ip: str, ip_from_args: t.Optional[str] = None
+    ) -> t.Union[JavaStatusResponse, OfflineStatusResponse, MCStatusException]:
         """Execute the module."""
-        return await get_status(ip, java=True)
+        return await get_status(ip_from_args or ip, java=True)
 
 
 Module = JavaStatusModule

@@ -11,9 +11,11 @@ class BedrockStatusModule(AbstractModule):
     """Bedrock module for API v1."""
 
     @classmethod
-    async def execute(cls, ip: str) -> t.Union[BedrockStatusResponse, OfflineStatusResponse, MCStatusException]:
+    async def execute(
+        cls, ip: str, ip_from_args: t.Optional[str] = None
+    ) -> t.Union[BedrockStatusResponse, OfflineStatusResponse, MCStatusException]:
         """Execute the module."""
-        return await get_status(ip, java=False)
+        return await get_status(ip_from_args or ip, java=False)
 
 
 Module = BedrockStatusModule
