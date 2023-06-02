@@ -1,11 +1,11 @@
 {
   "template": "https://github.com/PerchunPak/python-template",
-  "commit": "594882638c034480f62155eb728199583aaedc53",
+  "commit": "6ee8fa314f40a196e762377e22cdff91590e8cc3",
   "checkout": null,
   "context": {
     "cookiecutter": {
       "project_name": "backend",
-      "organization": "PerchunPak",
+      "organization": "StatusMC",
       "project_description": "The API for statusmc.perchun.it (api.statusmc.perchun.it).",
       "other_languages_support": "n",
       "ukrainian_language_support": "n",
@@ -14,8 +14,7 @@
       "_copy_without_render": [
         ".venv",
         "docs/_build",
-        "docs/_autoapi_templates/python",
-        ".github/workflows"
+        "docs/_autoapi_templates/python"
       ],
       "_template": "https://github.com/PerchunPak/python-template"
     }
