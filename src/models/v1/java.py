@@ -84,7 +84,7 @@ class JavaStatusResponse(BaseOnlineStatusResponse):  # type: ignore[misc] # Expl
                 "underlined",
                 "obfuscated",
             }:
-                raw["description"].pop(known_key)
+                raw["description"].pop(known_key, None)
 
             if raw["description"].get("extra") is not None:
                 for extra in raw["description"]["extra"]:
@@ -98,7 +98,11 @@ class JavaStatusResponse(BaseOnlineStatusResponse):  # type: ignore[misc] # Expl
                         "underlined",
                         "obfuscated",
                     }:
-                        extra.pop(known_key)
+                        extra.pop(known_key, None)
+
+                raw["description"]["extra"] = list(filter(None, raw["description"]["extra"]))
+                if not raw["description"]["extra"]:
+                    raw["description"].pop("extra")
 
             if not raw["description"]:
                 raw.pop("description")
@@ -113,6 +117,7 @@ class JavaStatusResponse(BaseOnlineStatusResponse):  # type: ignore[misc] # Expl
                 player.pop("name")
                 player.pop("id")
 
+            raw["players"]["sample"] = list(filter(None, raw["players"]["sample"]))
             if not raw["players"]["sample"]:
                 raw["players"].pop("sample")
 
@@ -124,11 +129,9 @@ class JavaStatusResponse(BaseOnlineStatusResponse):  # type: ignore[misc] # Expl
         if not raw["version"]:
             raw.pop("version")
 
-        raw.pop("favicon")
+        raw.pop("favicon", None)
 
-        if raw:
-            return raw
-        return None
+        return raw if raw else None
 
     @staticmethod
     def get_players_list(
