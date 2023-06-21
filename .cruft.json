@@ -1,6 +1,6 @@
 {
   "template": "https://github.com/PerchunPak/python-template",
-  "commit": "6ee8fa314f40a196e762377e22cdff91590e8cc3",
+  "commit": "8c39ce970f184732bbfd2cc9040d395e878997d0",
   "checkout": null,
   "context": {
     "cookiecutter": {

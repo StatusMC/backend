@@ -76,15 +76,17 @@ jobs:
 
     - name: Bump template
       run: |
+        set -o pipefail
+        
         cruft update -y
-        ls **/*.rej
+        ls **/*.rej | true
 
         if [ $? -eq 0 ]
         then
           rm -f poetry.lock.rej poetry.lock
           git checkout master -- poetry.lock
           poetry lock --no-update
-          ls **/*.rej
+          ls **/*.rej | true
 
           if [ $? -eq 0 ]
           then
