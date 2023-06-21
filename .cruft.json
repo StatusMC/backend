@@ -6,7 +6,7 @@
     "cookiecutter": {
       "project_name": "backend",
       "organization": "StatusMC",
-      "project_description": "The API for statusmc.perchun.it (api.statusmc.perchun.it).",
+      "project_description": "The API for statusmc.perchun.it (statusmc.perchun.it/api).",
       "other_languages_support": "n",
       "ukrainian_language_support": "n",
       "russian_language_support": "n",
