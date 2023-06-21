@@ -12,7 +12,7 @@ from omegaconf import dictconfig
 import src.utils
 
 BASE_DIR = pathlib.Path(__file__).parent.parent
-DEV_MODE = os.environ.get("DETA_SPACE_APP", "false") != "true"
+DEV_MODE = not bool(os.environ.get("PROD"))
 
 
 @dataclasses.dataclass
@@ -22,6 +22,11 @@ class SentryConfigSection:
     enabled: bool = False
     dsn: str = "..."
     traces_sample_rate: float = 1.0
+
+    def __post_init__(self) -> None:
+        """Disable Sentry if in dev mode."""
+        if DEV_MODE:
+            self.enabled = False
 
 
 @dataclasses.dataclass
@@ -41,54 +46,36 @@ class Config(metaclass=src.utils.Singleton):
         Returns:
             :py:class:`.Config` instance.
         """
+        config_path = BASE_DIR / "data" / "config.yml"
+        config_path.parent.mkdir(exist_ok=True)
         cfg = omegaconf.OmegaConf.structured(cls)
 
-        if DEV_MODE:
-            spacefile = yaml.safe_load((BASE_DIR / "Spacefile").open())
-            assert spacefile["v"] == 0
-
-            registered_env_variables = t.cast(
-                t.List[str], list(map(lambda e: e["name"], spacefile["micros"][0]["presets"]["env"]))  # type: ignore[no-any-return]
-            )
-            right_env_variables = Config._get_right_env_variables(cfg)
-
-            ridiculous = list(filter(lambda e: e not in right_env_variables, registered_env_variables))
-            unregistered = list(filter(lambda e: e not in registered_env_variables, right_env_variables))
-            if ridiculous or unregistered:
-                formatted_ridiculous = "\n".join(ridiculous)
-                formatted_unregistered = "\n".join(unregistered)
-
-                raise ValueError(
-                    (f"Ridiculous environment variables found:\n{formatted_ridiculous}\n\n" if ridiculous else "")
-                    + f"Unregistered environment variables found:\n{formatted_unregistered}"
-                    if unregistered
-                    else ""
-                )
+        if config_path.exists():
+            loaded_config = omegaconf.OmegaConf.load(config_path)
+            cfg = omegaconf.OmegaConf.merge(cfg, loaded_config)
 
         cls._handle_env_variables(cfg)
+
+        with open(config_path, "w") as config_file:
+            omegaconf.OmegaConf.save(cfg, config_file)
 
         return t.cast(te.Self, cfg)
 
     @staticmethod
-    def _get_right_env_variables(cfg: dictconfig.DictConfig, *, prefix: str = "CUSTOM") -> t.List[str]:
-        result = []
-        for key in cfg:
-            key_to_look_for = f"{prefix}_{key!s}" if prefix else str(key)
-            if isinstance(cfg[key], dictconfig.DictConfig):
-                result.extend(Config._get_right_env_variables(cfg[key], prefix=key_to_look_for))
-                continue
+    def _handle_env_variables(cfg: dictconfig.DictConfig, *, prefix: t.Optional[str] = None) -> None:
+        """Process all values, and redef them with values from env variables.
 
-            result.append(key_to_look_for.upper())
-        return result
-
-    @staticmethod
-    def _handle_env_variables(cfg: dictconfig.DictConfig, *, prefix: str = "CUSTOM") -> None:
-        """Process all values, and redef them with values from env variables."""
+        Args:
+            cfg: :py:class:`.Config` instance.
+            prefix:
+                Prefix for env variable. Example ``prefix="sentry"`` and
+                ``key="enabled"`` will look for ``SENTRY_ENABLED``.
+        """
         for key in cfg:
-            key_to_look_for = f"{prefix}_{key!s}" if prefix else str(key)
+            key_to_look_for = (f"{prefix}_{key!r}" if prefix else str(key)).upper()
             if isinstance(cfg[key], dictconfig.DictConfig):
-                Config._get_right_env_variables(cfg[key], prefix=key_to_look_for)
+                Config._handle_env_variables(cfg[key], prefix=key_to_look_for)
                 continue
 
             if key_to_look_for in os.environ:
-                cfg[key] = os.environ[key_to_look_for.upper()]
+                cfg[key] = os.environ[key_to_look_for]
