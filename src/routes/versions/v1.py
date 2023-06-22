@@ -28,7 +28,7 @@ class V1ApiRouter(ApiRouter):
     ) -> t.Union[t.Dict[str, t.Any], str]:
         """Execute provided modules in an API endpoint."""
         modules = modules.split(",")
-        if modules is None or len(modules) == 0:
+        if modules is None or len(modules) == 0 or modules == [""]:
             return (
                 "No modules specified, please specify at least one module.\n"
                 "If you don't know what I am talking about, please read the documentation at "
