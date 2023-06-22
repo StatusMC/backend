@@ -45,13 +45,17 @@ async def get_status(
             else mcstatus.BedrockServer.lookup(ip, timeout=1)
         )
     except Exception as exception:
-        return MCStatusException.from_exception(exception)
+        return await OfflineStatusResponse.from_mcstatus_object(
+            ip, MCStatusException.from_exception(exception), is_java=java
+        )
 
     assert isinstance(server, (mcstatus.JavaServer, mcstatus.BedrockServer))  # mypy thinks that it's their base class
     try:
         status = await server.async_status()
     except Exception as exception:
-        return await OfflineStatusResponse.from_mcstatus_object(server, MCStatusException.from_exception(exception))
+        return await OfflineStatusResponse.from_mcstatus_object(
+            server, MCStatusException.from_exception(exception), is_java=java
+        )
 
     model: t.Union[t.Type[JavaStatusResponse], t.Type[BedrockStatusResponse]] = (
         JavaStatusResponse if java else BedrockStatusResponse

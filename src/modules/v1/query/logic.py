@@ -14,11 +14,15 @@ async def get_query(ip: str) -> t.Union[QueryResponse, OfflineStatusResponse, MC
     try:
         server = await mcstatus.JavaServer.async_lookup(ip, timeout=1)
     except Exception as exception:
-        return MCStatusException.from_exception(exception)
+        return await OfflineStatusResponse.from_mcstatus_object(
+            ip, MCStatusException.from_exception(exception), is_java=True
+        )
 
     try:
         query = await server.async_query()
     except Exception as exception:
-        return await OfflineStatusResponse.from_mcstatus_object(server, MCStatusException.from_exception(exception))
+        return await OfflineStatusResponse.from_mcstatus_object(
+            server, MCStatusException.from_exception(exception), is_java=True
+        )
 
     return QueryResponse.from_mcstatus_object(server, query)
