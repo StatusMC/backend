@@ -3,6 +3,7 @@ import typing as t
 
 import mcstatus
 
+from src.logic import cacher
 from src.models.v1 import (
     BedrockStatusResponse,
     JavaStatusResponse,
@@ -32,6 +33,7 @@ async def get_status(  # noqa: D103
     ...
 
 
+@cacher.cached(ttl=5 * 60)
 async def get_status(
     ip: str, *, java: bool = True
 ) -> t.Union[JavaStatusResponse, BedrockStatusResponse, OfflineStatusResponse, MCStatusException]:
@@ -45,9 +47,7 @@ async def get_status(
     try:
         status = await server.async_status()
     except Exception as exception:
-        return await OfflineStatusResponse.from_mcstatus_object(
-            server, MCStatusException.from_exception(exception, with_internal_info=False)
-        )
+        return await OfflineStatusResponse.from_mcstatus_object(server, MCStatusException.from_exception(exception))
 
     model: t.Union[t.Type[JavaStatusResponse], t.Type[BedrockStatusResponse]] = (
         JavaStatusResponse if java else BedrockStatusResponse

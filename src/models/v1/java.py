@@ -9,7 +9,6 @@ from src.models.v1.shared import (
     BaseModel,
     BaseOnlineStatusResponse,
     FormattedString,
-    InternalInfo,
     PlayersInfo,
     VersionInfo,
 )
@@ -64,10 +63,6 @@ class JavaStatusResponse(BaseOnlineStatusResponse):  # type: ignore[misc] # Expl
                 list=cls.get_players_list(status.players.sample),
             ),
             icon=status.icon,
-            internal=InternalInfo(
-                cached_at=0,
-                cache_ends_at=0,
-            ),
             additional=additional_data,
         )
 

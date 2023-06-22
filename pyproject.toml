@@ -23,6 +23,10 @@ uvicorn = { extras = ["standart"], version = "~0.22" }
 
 omegaconf = "~2.3"
 
+# caching utils
+cachetools = "~5.3"
+asyncache = "~0.3"
+
 loguru = "~0.7"
 sentry-sdk = "~1.25"
 
@@ -65,6 +69,7 @@ GitPython = "~3.1"
 
 [tool.poetry.group.types.dependencies]
 types-pyyaml = "^6.0.12.9"
+types-cachetools = "^5.3.0.5"
 
 
 [tool.poetry.group.docker]

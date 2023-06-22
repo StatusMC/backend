@@ -2,7 +2,7 @@
 import base64
 import typing as t
 
-from src.logic import get_status
+from src.logic import cacher, get_status
 from src.models import v1
 from src.models.v1 import exc
 
@@ -68,6 +68,7 @@ SUVORK5CYII=
 )
 
 
+@cacher.cached(ttl=5 * 60)
 async def get_icon(ip: t.Optional[str]) -> bytes:
     """Get the server icon as a PNG image."""
     if ip is None:

@@ -9,7 +9,6 @@ from src.models.v1.shared import (
     AddressInResponse,
     BaseOnlineStatusResponse,
     FormattedString,
-    InternalInfo,
     PlayersInfo,
     VersionInfo,
 )
@@ -59,8 +58,4 @@ class BedrockStatusResponse(BaseOnlineStatusResponse):
             ),
             map_name=status.map_name,
             gamemode=status.gamemode,
-            internal=InternalInfo(
-                cached_at=0,
-                cache_ends_at=0,
-            ),
         )

@@ -4,11 +4,7 @@ import mcstatus.motd
 import typing_extensions as te
 
 from src.models.v1.exc import MCStatusException
-from src.models.v1.shared import (
-    AddressInResponse,
-    BaseStatusResponse,
-    InternalInfo,
-)
+from src.models.v1.shared import AddressInResponse, BaseStatusResponse
 
 
 class OfflineStatusResponse(BaseStatusResponse):
@@ -24,10 +20,6 @@ class OfflineStatusResponse(BaseStatusResponse):
             address=AddressInResponse(
                 host=server.address.host,
                 port=server.address.port,
-            ),
-            internal=InternalInfo(
-                cached_at=0,
-                cache_ends_at=0,
             ),
             error=error,
         )

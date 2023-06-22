@@ -9,7 +9,6 @@ from src.models.v1.shared import (
     BaseModel,
     BaseOnlineStatusResponse,
     FormattedString,
-    InternalInfo,
     PlayersInfo,
     VersionInfoOnlyName,
 )
@@ -81,9 +80,5 @@ class QueryResponse(BaseOnlineStatusResponse):
                 online=query.players.online,
                 max=query.players.max,
                 names=query.players.names,
-            ),
-            internal=InternalInfo(
-                cached_at=0,
-                cache_ends_at=0,
             ),
         )

@@ -1,4 +1,4 @@
-"""Set ``Cache-Control`` header for 5 minutes."""
+"""Set ``Cache-Control`` header to 5 minutes."""
 from fastapi import Request, Response
 from starlette.middleware.base import (
     BaseHTTPMiddleware,
@@ -9,9 +9,9 @@ import src.config
 
 
 class CacheControlMiddleware(BaseHTTPMiddleware):
-    """Set Cache-Control header for 5 minutes.
+    """Set Cache-Control header to 5 minutes.
 
-    If header is set already by route handler or other middleware, not set by it.
+    If a header is set already by route handler or other middleware, do not set it.
     """
 
     def __init__(self, *args, **kwargs) -> None:

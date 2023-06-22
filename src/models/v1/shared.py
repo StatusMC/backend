@@ -50,7 +50,6 @@ class PlayersInfo(BaseModel):
 class BaseStatusResponse(BaseModel, abc.ABC):
     online: bool
     address: AddressInResponse
-    internal: InternalInfo
 
     @classmethod
     @abc.abstractmethod
