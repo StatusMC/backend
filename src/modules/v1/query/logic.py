@@ -12,7 +12,7 @@ from src.models.v1.exc import MCStatusException
 async def get_query(ip: str) -> t.Union[QueryResponse, OfflineStatusResponse, MCStatusException]:
     """Get the query response."""
     try:
-        server = await mcstatus.JavaServer.async_lookup(ip)
+        server = await mcstatus.JavaServer.async_lookup(ip, timeout=1)
     except Exception as exception:
         return MCStatusException.from_exception(exception)
 

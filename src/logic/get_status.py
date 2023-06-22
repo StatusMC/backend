@@ -39,7 +39,11 @@ async def get_status(
 ) -> t.Union[JavaStatusResponse, BedrockStatusResponse, OfflineStatusResponse, MCStatusException]:
     """Get the status of the server."""
     try:
-        server = await mcstatus.JavaServer.async_lookup(ip) if java else mcstatus.BedrockServer.lookup(ip)
+        server = (
+            await mcstatus.JavaServer.async_lookup(ip, timeout=1)
+            if java
+            else mcstatus.BedrockServer.lookup(ip, timeout=1)
+        )
     except Exception as exception:
         return MCStatusException.from_exception(exception)
 
