@@ -18,7 +18,7 @@ python = ">=3.8.1,<3.12"
 
 # Our dependecies
 mcstatus = "11.0.0rc2"
-fastapi = "~0.98"
+fastapi = "~0.99"
 uvicorn = { extras = ["standart"], version = "~0.22" }
 
 omegaconf = "~2.3"
