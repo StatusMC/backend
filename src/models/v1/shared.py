@@ -27,7 +27,7 @@ class InternalInfo(BaseModel):
     cache_ends_at: int
 
 
-class FormattedString(BaseModel):  # type: ignore[misc] # Explicit "Any"
+class FormattedString(BaseModel):
     minecraft: str
     plain: str
     html: str
