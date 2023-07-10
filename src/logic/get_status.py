@@ -51,7 +51,7 @@ async def get_status(
 
     assert isinstance(server, (mcstatus.JavaServer, mcstatus.BedrockServer))  # mypy thinks that it's their base class
     try:
-        status = await server.async_status()
+        status = await server.async_status(tries=1)
     except Exception as exception:
         return await OfflineStatusResponse.from_mcstatus_object(
             server, MCStatusException.from_exception(exception), is_java=java
