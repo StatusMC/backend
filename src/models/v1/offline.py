@@ -10,7 +10,7 @@ from src.models.v1.shared import AddressInResponse, BaseStatusResponse
 
 class OfflineStatusResponse(BaseStatusResponse):
     online: t.Literal[False]
-    address: t.Union[AddressInResponse, str]
+    address: t.Union[AddressInResponse, str]  # type: ignore[assignment] # liscov
     error: MCStatusException
 
     @classmethod
