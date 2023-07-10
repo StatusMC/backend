@@ -8,7 +8,7 @@ import typing_extensions as te
 
 
 class BaseModel(pydantic.BaseModel):
-    @pydantic.root_validator(pre=False)
+    @pydantic.root_validator(pre=False)  # type: ignore[call-overload] # mypy thinks that `False` is bool instead of `Literal[False]`
     def check(cls, values: t.Dict[str, t.Any]) -> t.Dict[str, t.Any]:  # type: ignore[misc] # Explicit "Any"
         result = values.copy()
         for key, value in values.items():
