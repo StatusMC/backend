@@ -28,7 +28,7 @@ class InternalInfo(BaseModel):
 
 
 class FormattedString(BaseModel):  # type: ignore[misc] # Explicit "Any"
-    raw: t.Union[t.Dict[str, t.Any], t.List[t.Dict[str, t.Any]], str]  # type: ignore[misc] # Explicit "Any"
+    minecraft: str
     plain: str
     html: str
     ansi: str

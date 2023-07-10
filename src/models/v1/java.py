@@ -43,14 +43,14 @@ class JavaStatusResponse(BaseOnlineStatusResponse):  # type: ignore[misc] # Expl
                 port=server.address.port,
             ),
             motd=FormattedString(
-                raw=status.motd.raw,  # type: ignore[arg-type] # typed dicts
+                minecraft=motd.to_minecraft(),
                 plain=motd.to_plain(),
                 html=motd.to_html(),
                 ansi=motd.to_ansi(),
             ),
             version=VersionInfo(
                 name=FormattedString(
-                    raw=status.version.name,
+                    minecraft=version_name.to_minecraft(),
                     plain=version_name.to_plain(),
                     html=version_name.to_html(),
                     ansi=version_name.to_ansi(),
@@ -141,7 +141,7 @@ class JavaStatusResponse(BaseOnlineStatusResponse):  # type: ignore[misc] # Expl
             players.append(
                 PlayerInfo(
                     name=FormattedString(
-                        raw=player.name,
+                        minecraft=player_name.to_minecraft(),
                         plain=player_name.to_plain(),
                         html=player_name.to_html(),
                         ansi=player_name.to_ansi(),

@@ -55,7 +55,7 @@ class QueryResponse(BaseOnlineStatusResponse):
                 port=server.address.port,
             ),
             motd=FormattedString(
-                raw=query.motd.raw,  # type: ignore[arg-type] # typed dicts
+                minecraft=motd.to_minecraft(),
                 plain=motd.to_plain(),
                 html=motd.to_html(),
                 ansi=motd.to_ansi(),
@@ -63,13 +63,13 @@ class QueryResponse(BaseOnlineStatusResponse):
             map_name=query.map,
             version=QueryVersionInfo(
                 name=FormattedString(
-                    raw=query.software.version,
+                    minecraft=version_name.to_minecraft(),
                     plain=version_name.to_plain(),
                     html=version_name.to_html(),
                     ansi=version_name.to_ansi(),
                 ),
                 brand=FormattedString(
-                    raw=query.software.brand,
+                    minecraft=brand.to_minecraft(),
                     plain=brand.to_plain(),
                     html=brand.to_html(),
                     ansi=brand.to_ansi(),
