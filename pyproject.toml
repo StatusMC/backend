@@ -35,7 +35,7 @@ sentry-sdk = "~1.29"
 [tool.poetry.group.make.dependencies]
 black = "~23"
 isort = "~5.12"
-pycln = "~2.1"
+pycln = "~2.2"
 flake8 = "~6"
 flake8-docstrings = "~1"
 flake8-ensure-ascii = "~1.0"
@@ -57,7 +57,7 @@ pytest-cov = "~4.1"
 pytest-mock = "~3.11"
 pytest-testmon = "~2.0"
 pytest-randomly = "~3.13"
-Faker = "~18.13"
+Faker = "~19.3"
 
 
 [tool.poetry.group.github_hooks]
