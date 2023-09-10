@@ -34,7 +34,6 @@ class Config(metaclass=src.utils.Singleton):
     """The main config that holds everything in itself."""
 
     api_versions: t.List[int] = dataclasses.field(default_factory=lambda: [1])
-    cache_time: int = 300
     sentry: SentryConfigSection = dataclasses.field(default_factory=SentryConfigSection)
 
     @classmethod

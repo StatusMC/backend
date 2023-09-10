@@ -22,11 +22,6 @@ class AddressInResponse(BaseModel):
     port: int
 
 
-class InternalInfo(BaseModel):
-    cached_at: int
-    cache_ends_at: int
-
-
 class FormattedString(BaseModel):
     minecraft: str
     plain: str

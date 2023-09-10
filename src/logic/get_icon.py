@@ -68,7 +68,7 @@ SUVORK5CYII=
 )
 
 
-@cacher.cached(ttl=5 * 60)
+@cacher.cached(ttl=3)
 async def get_icon(ip: t.Optional[str]) -> bytes:
     """Get the server icon as a PNG image."""
     if ip is None:

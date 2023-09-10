@@ -33,7 +33,7 @@ async def get_status(  # noqa: D103
     ...
 
 
-@cacher.cached(ttl=5 * 60)
+@cacher.cached(ttl=3)
 async def get_status(
     ip: str, *, java: bool = True
 ) -> t.Union[JavaStatusResponse, BedrockStatusResponse, OfflineStatusResponse, MCStatusException]:
