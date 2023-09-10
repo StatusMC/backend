@@ -8,7 +8,7 @@ from src.models.v1 import OfflineStatusResponse, QueryResponse
 from src.models.v1.exc import MCStatusException
 
 
-@cacher.cached(ttl=3)
+@cacher.cached(ttl=5 * 60)
 async def get_query(ip: str) -> t.Union[QueryResponse, OfflineStatusResponse, MCStatusException]:
     """Get the query response."""
     try:
