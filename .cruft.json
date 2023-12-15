@@ -1,6 +1,6 @@
 {
   "template": "https://github.com/PerchunPak/python-template",
-  "commit": "6ea19c4150d694c294d90c2fb5141514a9643529",
+  "commit": "306ee570af73d4bc3636425ef8cfacf3d18da074",
   "checkout": null,
   "context": {
     "cookiecutter": {
@@ -12,8 +12,6 @@
       "russian_language_support": "n",
       "license": "MIT",
       "_copy_without_render": [
-        ".venv",
-        "docs/_build",
         "docs/_autoapi_templates/python"
       ],
       "_template": "https://github.com/PerchunPak/python-template"
