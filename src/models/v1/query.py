@@ -24,7 +24,11 @@ class PluginInfo(BaseModel):
 
     @classmethod
     def from_string(cls, string: str) -> te.Self:
-        name, version = string.rsplit(" ", maxsplit=1)
+        try:
+            name, version = string.rsplit(" ", maxsplit=1)
+        except ValueError:
+            return cls(name=string, version="")
+
         return cls(name=name, version=version)
 
 
