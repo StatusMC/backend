@@ -20,6 +20,11 @@ ENV PYTHONPATH "/app"
 WORKDIR /app
 
 RUN groupadd -g 5000 container && useradd -d /app -m -g container -u 5000 container
+
+RUN apt-get update && \
+    apt-get install git -y --no-install-recommends && \
+    apt-get clean
+
 COPY --from=poetry /root/requirements.txt ./
 RUN pip install --no-cache-dir -U pip && \
     pip --no-cache-dir install -r requirements.txt
@@ -27,10 +32,8 @@ COPY src/ src/
 
 
 FROM base AS git
+
 # Save build version
-# (`apt-get update` because without it `package not found`, even if this update already was in `base` step)
-RUN apt-get update && \
-    apt-get install git -y --no-install-recommends
 COPY .git .git
 RUN git rev-parse HEAD > /commit.txt
 
