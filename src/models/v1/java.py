@@ -96,7 +96,8 @@ class JavaStatusResponse(BaseOnlineStatusResponse):  # type: ignore[misc] # Expl
                         }:
                             extra.pop(known_key, None)
 
-                raw["description"]["extra"] = list(filter(None, raw["description"]["extra"]))
+                # filter out falsy (bool(x) == False) values and strings
+                raw["description"]["extra"] = list(filter(lambda x: not isinstance(x, str) and x, raw["description"]["extra"]))
                 if not raw["description"]["extra"]:
                     raw["description"].pop("extra")
 
