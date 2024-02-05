@@ -147,7 +147,7 @@ class JavaStatusResponse(BaseOnlineStatusResponse):  # type: ignore[misc] # Expl
                         html=player_name.to_html(),
                         ansi=player_name.to_ansi(),
                     ),
-                    uuid=player.uuid,
+                    uuid=str(player.uuid),
                 )
             )
 
