@@ -83,17 +83,18 @@ class JavaStatusResponse(BaseOnlineStatusResponse):  # type: ignore[misc] # Expl
 
             if raw["description"].get("extra") is not None:
                 for extra in raw["description"]["extra"]:
-                    for known_key in {
-                        "text",
-                        "translation",
-                        "color",
-                        "bold",
-                        "strikethrough",
-                        "italic",
-                        "underlined",
-                        "obfuscated",
-                    }:
-                        extra.pop(known_key, None)
+                    if isinstance(extra, dict):
+                        for known_key in {
+                            "text",
+                            "translation",
+                            "color",
+                            "bold",
+                            "strikethrough",
+                            "italic",
+                            "underlined",
+                            "obfuscated",
+                        }:
+                            extra.pop(known_key, None)
 
                 raw["description"]["extra"] = list(filter(None, raw["description"]["extra"]))
                 if not raw["description"]["extra"]:
