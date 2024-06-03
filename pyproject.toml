@@ -19,7 +19,7 @@ python = ">=3.8.1,<3.13"
 mcstatus = { git = "https://github.com/py-mine/mcstatus", rev = "58afaecc07ac0f11685aac0f5c9fea826e18e863" }
 fastapi = "~0.111"
 pydantic = "~1"
-uvicorn = { extras = ["standart"], version = "~0.29" }
+uvicorn = { extras = ["standart"], version = "~0.30" }
 
 omegaconf = "~2.3"
 
