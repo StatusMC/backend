@@ -24,7 +24,7 @@ uvicorn = { extras = ["standart"], version = "~0.30" }
 omegaconf = "~2.3"
 
 # caching utils
-cachetools = "~5.3"
+cachetools = "~5.4"
 asyncache = "~0.3"
 
 loguru = "~0.7"
