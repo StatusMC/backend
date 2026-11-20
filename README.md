@@ -1,5 +1,12 @@
 # Our Backend
 
+> [!NOTE] This project has been retired
+>
+> StatusMC did not receive any activity (to be fair, it is my fault for not
+> doing any marketing), and I lost interest in maintaining it. You can still
+> access the underlying library [here](https://github.com/py-mine/mcstatus) (it
+> is still actively maintained).
+
 [![Support Ukraine](https://badgen.net/badge/support/UKRAINE/?color=0057B8&labelColor=FFD700)](https://www.gov.uk/government/news/ukraine-what-you-can-do-to-help)
 
 [![Build Status](https://github.com/StatusMC/backend/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/StatusMC/backend/actions?query=workflow%3Atest)
